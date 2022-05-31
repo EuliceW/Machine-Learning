@@ -1,0 +1,8 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+import cv2
+
+(Xtrain_img,Ytrain_img),(Xtest_img,Ytest_img) = tf.keras.datasets.mnist.load_data() 
+
+plt.imshow(Xtrain_img[827])
