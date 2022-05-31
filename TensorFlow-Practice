@@ -6,3 +6,34 @@ import cv2
 (Xtrain_img,Ytrain_img),(Xtest_img,Ytest_img) = tf.keras.datasets.mnist.load_data() 
 
 plt.imshow(Xtrain_img[827])
+
+Xtrain_img.shape
+Ytrain_img.shape
+
+Xtrain = Xtrain_img.reshape((60000,28*28))
+Xtest = Xtest_img.reshape((10000,28*28))
+
+Xtrain.shape
+
+Ytrain = tf.one_hot(Ytrain_img,10)
+Ytest = tf.one_hot(Ytest_img,10)
+
+Ytrain.shape
+
+MyModel = tf.keras.Sequential()
+MyModel.add(tf.keras.layers.Dense(90))
+MyModel.add(tf.keras.layers.ReLU())
+MyModel.add(tf.keras.layers.Dense(60))
+MyModel.add(tf.keras.layers.ReLU())
+MyModel.add(tf.keras.layers.Dense(10))
+MyModel.add(tf.keras.layers.Softmax())
+
+MyModel(Xtrain)
+
+MyModel.summary()
+
+MyModel.compile( optimizer=tf.keras.optimizers.Adam() , loss = tf.keras.losses.CategoricalCrossentropy(), metrics=[ tf.keras.metrics.CategoricalAccuracy()])
+MyModel.fit(Xtrain,Ytrain,epochs=5)
+
+MyModel.evaluate(Xtest,Ytest)
+# Results in an accuracy of 94%
